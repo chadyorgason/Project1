@@ -9,29 +9,23 @@ import CreateGalleryModal from './CreateGalleryComponents/NewGallerySetup';
 import Modal from './CreateGalleryComponents/Modal';
 import { sidebarStyles } from '../assets/styles/sidebarStyles';
 
-const data = Array.from({ length: 15 }, (_, index) => ({ 
-  key: String(index),
-  title: `Photo ${index + 1}`,
-  // image: require(`../assets/icon.png`),
- }));
-
 const SideBar = () => {
   return (
     <SafeAreaView style={sidebarStyles.container}>
       <View style={sidebarStyles.sidebar}>
-      <TouchableOpacity onPress={() => console.log('Navigate to Dashboard')}>
-        <Text style={sidebarStyles.sidebarItem}>Dashboard</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => console.log('Navigate to Profile')}>
-        <Text style={sidebarStyles.sidebarItem}>Profile</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => console.log('Navigate to Settings')}>
-        <Text style={sidebarStyles.sidebarItem}>Settings</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => console.log('Navigate to Dashboard')}>
+          <Text style={sidebarStyles.sidebarItem}>Dashboard</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => console.log('Navigate to Profile')}>
+          <Text style={sidebarStyles.sidebarItem}>Profile</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => console.log('Navigate to Settings')}>
+          <Text style={sidebarStyles.sidebarItem}>Settings</Text>
+        </TouchableOpacity>
 
         <Modal/>
 
-    </View>
+      </View>
     </SafeAreaView>
   );
 };

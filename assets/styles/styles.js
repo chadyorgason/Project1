@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     content: {
         flex: 4,
         alignItems: 'center',
-        padding: 20,
+        padding: 0,
     },
     logo: {
         width: 150,
@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 10,
+        marginTop: 20,
         textAlign: 'center',
     },
     imageContainer: {
@@ -143,16 +144,6 @@ export const styles = StyleSheet.create({
         padding: 10,
         //backgroundColor: '#28a745', // Use your chosen color here
     },
-    rightColumn: {
-        position: 'absolute',
-        bottom: 5,
-        right: 10,
-        height: '10%',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        padding: 10,
-        //backgroundColor: '#28a745', // Use your chosen color here
-    },
     backButton: {
         alignItems: 'left',
     },
@@ -163,18 +154,26 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    alertContainer: {
+    rightColumn: {
         position: 'absolute',
-        bottom: '80%',
-        left: '80%',
+        bottom: 5,
+        right: 10,
+        height: '10%',
         justifyContent: 'center',
-        alignItems: 'center',
-        width: 'auto',
+        alignItems: 'flex-start',
+        padding: 10,
+        //backgroundColor: '#28a745', // Use your chosen color here
     },
     alert: {
-        backgroundColor: '#ADEBB3',
-        padding: 10,
+        backgroundColor: '#c1e8c4',
+        padding: 20,
         borderRadius: 5,
+        minWidth: 250,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
+        elevation: 10, // For Android
     },
     alertText: {
         color: 'black',
