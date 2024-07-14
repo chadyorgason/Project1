@@ -2,7 +2,7 @@
 //images in the gallery. Has back button to get to galleries
 
 import * as React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, ScrollView } from 'react-native';
 import SideBar from '../../Components/SideBar';
 import { styles } from '../../assets/styles/styles';
 import { s3Client } from '../../Components/Client';
@@ -16,12 +16,15 @@ export default function PhotosScreen({ navigation, route }) {
 
         <SideBar/>
 
-        <View style={styles.content}>
-            <View style={styles.leftColumn}>
-              <Button style={styles.backButton} title="Back" onPress={() => navigation.goBack()} />
-            </View>
-            {CallImages(folderName)}
-        </View>
+        
+          <View style={styles.content}>
+            <ScrollView>
+              <View style={styles.leftColumn}>
+                <Button style={styles.backButton} title="Back" onPress={() => navigation.goBack()} />
+              </View>
+              {CallImages(folderName)}
+            </ScrollView>
+          </View>
     </View>
 
     

@@ -1,11 +1,14 @@
 // Used primarily for the sidebar
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+console.log('width', windowWidth)
 
 export const sidebarStyles = StyleSheet.create({
     container: {
       flex: 1,
-      width: '75%',
+      width: windowWidth * 0.3, // 20% of the window width
     },
     sidebar: {
       flex: 1,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ActivityIndicator, TouchableOpacity, Alert } from 'react-native';
 import SharedLink from './SharedLink';
 import { styles } from '../assets/styles/styles';
-// import { Clipboard } from 'react-native';
+import * as Clipboard from 'expo-clipboard';
 import { Ionicons } from '@expo/vector-icons';
 
 class ReturnURL extends Component {
@@ -33,10 +33,10 @@ class ReturnURL extends Component {
       });
   }
 
-  copyToClipboard = () => {
-    // Clipboard.setString(this.state.shareableURL);
+  copyToClipboard = async () => {
+    await Clipboard.setString(this.state.shareableURL);
     this.setState({ copied: true }, () => {
-        setTimeout(() => this.setState({ copied: false }), 2000); // Hide alert after 2 seconds
+        setTimeout(() => this.setState({ copied: false }), 5000); // Hide alert after 5 seconds
       });
   };
 
@@ -56,6 +56,11 @@ class ReturnURL extends Component {
           <Ionicons name='copy' size={20} color='grey' />
         </TouchableOpacity>
 
+      </View>
+    );
+
+    const alert = (
+      <View>
         {copied && (
           <View style={styles.rightColumn}>
             <View style={styles.alert}>
@@ -71,6 +76,7 @@ class ReturnURL extends Component {
         {titleComponent}
         {shareLinkComponent}
         {rows}
+        {alert}
       </View>
     );
   }
