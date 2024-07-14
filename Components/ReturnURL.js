@@ -69,7 +69,7 @@ class ReturnURL extends Component {
     return (
       <View>
         {titleComponent}
-        {/* {shareLinkComponent} */}
+        {shareLinkComponent}
         {rows}
       </View>
     );
