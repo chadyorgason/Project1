@@ -1,5 +1,5 @@
 import AWS from 'aws-sdk';
-import { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } from '../.env';
+import { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } from '@env';
 
 export const FindFolder = (token) => {
     const thisToken = token;
