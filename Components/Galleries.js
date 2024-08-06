@@ -3,54 +3,133 @@
 // When you click a gallery, it does a stack navigation to show the contents of
 // the gallery by pointing to the Photos.js in navigation/webscreens
 
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
 
-export const renderGalleries = (folderNames, styles, navigation) => {
+class Galleries extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dimensions: Dimensions.get('window')
+    };
+  }
 
-  const folderNamesHere = folderNames;
-  const rows = [];
+  componentDidMount() {
+    Dimensions.addEventListener('change', this.handleResize);
+  }
 
-    for (let i = 0; i < folderNamesHere.length; i += 4) {
-      const rowPhotos = folderNamesHere.slice(i, i + 4);
+  componentWillUnmount() {
+    Dimensions.removeEventListener('change', this.handleResize);
+  }
 
-      const row = (
-        <View key={i} style={styles.imageContainer}>
-          {rowPhotos.map((folder, index) => (
-            <TouchableOpacity key={index} onPress={() => navigation.navigate('Photos', { folderName: folder.folder })}>
-              {folder.firstUrl.endsWith('None') ? (
-                <View style={styles.imageWrapper}>
-                  <Image source={{ uri: folder.firstUrl }} style={styles.greyImage} />
-                  <View style={styles.shine} />
-                  <Text style={styles.imgTitle}>{folder.folder}</Text>
-                  <Text style={styles.noImagesText}>No Images</Text>
-                </View>
-              ) : (
-                <View style={styles.imageWrapper}>
-                  <Image source={{ uri: folder.firstUrl }} style={styles.image} />
-                  <View style={styles.shine} />
-                  <Text style={styles.imgTitle}>{folder.folder}</Text>
-                </View>
-              )}
-            </TouchableOpacity>
-          ))}
+  handleResize = () => {
+    this.setState({ dimensions: Dimensions.get('window') });
+  };
+
+  renderGalleries = () => {
+    const { folderNames, styles, navigation } = this.props;
+    const { dimensions } = this.state;
+
+    const numberOfColumns = 5; // Adjust this to the desired number of columns
+    const imageMargin = 20;
+    const imageWidth = (dimensions.width * 0.75 - (numberOfColumns + 1) * imageMargin) / numberOfColumns;
+
+    return folderNames.map((folder, index) => (
+      <TouchableOpacity
+        key={index}
+        onPress={() => navigation.navigate('Photos', { folderName: folder.folder })}
+        style={{ ...styles.imageWrapper, width: imageWidth, height: imageWidth, margin: imageMargin / 2 }}
+      >
+        {folder.firstUrl.endsWith('None') ? (
+          <View style={{ ...styles.imageWrapper, width: '100%', height: '100%' }}>
+            <Image source={{ uri: folder.firstUrl }} style={styles.greyImage} />
+            <View style={styles.shine} />
+            <Text style={styles.imgTitle}>{folder.folder}</Text>
+            <Text style={styles.noImagesText}>No Images</Text>
+          </View>
+        ) : (
+          <View style={{ ...styles.imageWrapper,  width: '100%', height: '100%' }}>
+            <Image source={{ uri: folder.firstUrl }} style={styles.image} />
+            <View style={styles.shine} />
+            <Text style={styles.imgTitle}>{folder.folder}</Text>
+          </View>
+        )}
+      </TouchableOpacity>
+    ));
+  };
+
+  render() {
+    const { styles } = this.props;
+
+    return (
+      <View style={styles.content}>
+        <View>
+          <Text style={styles.title}>Galleries</Text>
         </View>
-      );
+        <View style={styles.imageContainer}>
+          {this.renderGalleries()}
+        </View>
+      </View>
+    );
+  }
+}
 
-      rows.push(row);
-
-    }
+export default Galleries;
 
 
-  const titleComponent = (
-    <View style={styles.content}>
-      <Text style={styles.title}>Galleries</Text>
-    </View>
-);
 
-  return (
-    <View>
-      {titleComponent}
-      {rows}
-    </View>
-  );
-};
+
+
+
+
+// import { View, Text, Image, TouchableOpacity } from 'react-native';
+
+// export const renderGalleries = (folderNames, styles, navigation) => {
+
+//   const folderNamesHere = folderNames;
+//   const rows = [];
+
+//     for (let i = 0; i < folderNamesHere.length; i += 4) {
+//       const rowPhotos = folderNamesHere.slice(i, i + 4);
+
+//       const row = (
+//         <View key={i} style={styles.imageContainer}>
+//           {rowPhotos.map((folder, index) => (
+//             <TouchableOpacity key={index} onPress={() => navigation.navigate('Photos', { folderName: folder.folder })}>
+//               {folder.firstUrl.endsWith('None') ? (
+//                 <View style={styles.imageWrapper}>
+//                   <Image source={{ uri: folder.firstUrl }} style={styles.greyImage} />
+//                   <View style={styles.shine} />
+//                   <Text style={styles.imgTitle}>{folder.folder}</Text>
+//                   <Text style={styles.noImagesText}>No Images</Text>
+//                 </View>
+//               ) : (
+//                 <View style={styles.imageWrapper}>
+//                   <Image source={{ uri: folder.firstUrl }} style={styles.image} />
+//                   <View style={styles.shine} />
+//                   <Text style={styles.imgTitle}>{folder.folder}</Text>
+//                 </View>
+//               )}
+//             </TouchableOpacity>
+//           ))}
+//         </View>
+//       );
+
+//       rows.push(row);
+
+//     }
+
+
+//   const titleComponent = (
+//     <View style={styles.content}>
+//       <Text style={styles.title}>Galleries</Text>
+//     </View>
+// );
+
+//   return (
+//     <View>
+//       {titleComponent}
+//       {rows}
+//     </View>
+//   );
+// };

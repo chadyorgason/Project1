@@ -16,8 +16,6 @@ import MediaScreen from './webscreens/Media';
 import PhotosScreen from './webscreens/Photos';
 // import ViewOnlyPage from '../Components/ViewOnlyGallery';
 
-const Stack = createStackNavigator();
-
 export default function WebMain() {
 
 
@@ -67,7 +65,7 @@ const MediaName = 'Media';
 //const Stack = createStackNavigator();
 
 const Tab = createMaterialTopTabNavigator();
-
+const Stack = createStackNavigator();
 
 
 const Tab1 = () => (

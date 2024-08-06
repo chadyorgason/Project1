@@ -5,7 +5,6 @@ import * as React from 'react';
 import { View, Text, StyleSheet, Button, ScrollView } from 'react-native';
 import SideBar from '../../Components/SideBar';
 import { styles } from '../../assets/styles/styles';
-import { s3Client } from '../../Components/Client';
 import { CallImages } from '../../Components/S3CallImages';
 
 export default function PhotosScreen({ navigation, route }) {
@@ -14,15 +13,15 @@ export default function PhotosScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
 
-        <SideBar/>
+        {/* <SideBar/> */}
 
         
           <View style={styles.content}>
             <ScrollView>
-              <View style={styles.leftColumn}>
+              {/* <View style={styles.leftColumn}>
                 <Button style={styles.backButton} title="Back" onPress={() => navigation.goBack()} />
-              </View>
-              {CallImages(folderName)}
+              </View> */}
+              {CallImages(folderName, navigation)}
             </ScrollView>
           </View>
     </View>

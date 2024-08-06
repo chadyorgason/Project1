@@ -1,81 +1,90 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ActivityIndicator, Button, Dimensions, StyleSheet } from 'react-native';
 import SharedLink from './SharedLink';
 import ReturnURL from './ReturnURL';
 import DownloadPhotoButton from './DownloadPhotoButton';
+import DeletePhotoButton from './DeletePhotoButton';
 
 class PhotoGallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rows: [],
       currentFolder: '',
       loading: true,
+      dimensions: Dimensions.get('window')
     };
   }
 
   componentDidMount() {
+    Dimensions.addEventListener('change', this.handleResize);
     this.preparePhotos();
   }
 
-  preparePhotos = async () => {
-    const { imageUrls, styles } = this.props;
-    const rows = [];
-    let row = <View />;
-    let currentFolder = '';
+  componentWillUnmount() {
+    Dimensions.removeEventListener('change', this.handleResize);
+  }
 
-    for (let i = 0; i < imageUrls.length; i += 4) {
-      const rowPhotos = imageUrls.slice(i + 1, i + 5);
-      const checkPhotos = rowPhotos.map((imageUrl) => imageUrl);
-      console.log('Check Photos: ', checkPhotos)
-      console.log(imageUrls)
+  handleResize = () => {
+    this.setState({ dimensions: Dimensions.get('window') });
+  };
 
-      if (checkPhotos[0]) {
-        row = (
-          <View key={i} style={styles.imageContainer}>
-            {rowPhotos.map((imageUrl, index) => (
-            <View key={index} style={styles.imageWrapper}>
-              <TouchableOpacity onPress={() => console.log(imageUrl.folder)}>
-                <Image source={{ uri: imageUrl.url }} style={styles.image} />
-              </TouchableOpacity>
-              <DownloadPhotoButton photoUrl={imageUrl.url} folder={imageUrl.folder} fileName={imageUrl.name} photoID={`photo_${index}`} />
-            </View>
-          ))}
-        </View>
-        );
-      } else {
-        row = (
-          <View key={i} style={styles.content}>
-            <Text style={styles.noImageText}>No Images</Text>
-          </View>
-        );
-      }
-
-      currentFolder = imageUrls[0].folder;
-      rows.push(row);
-    }
-
-    this.setState({ rows, currentFolder, loading: false });
-    console.log('Photos prepared and state updated');
+  preparePhotos = () => {
+    const { imageUrls } = this.props;
+    const currentFolder = imageUrls[0]?.folder || '';
+    this.setState({ currentFolder, loading: false });
   };
 
   render() {
-    const { styles } = this.props;
-    const { rows, currentFolder, loading } = this.state;
+    const { dimensions, currentFolder, loading } = this.state;
+    const { imageUrls, styles } = this.props;
+
+    const numberOfColumns = 5;
+    const imageMargin = 20;
+    const imageWidth = (dimensions.width * 0.75 - (numberOfColumns + 1) * imageMargin) / numberOfColumns;
+
+    const rows = (
+      <View style={styles.imageContainer}>
+        {imageUrls.slice(1).map((imageUrl, index) => (
+          <View>
+          <TouchableOpacity
+            key={index}
+            onPress={() => console.log(imageUrl.folder)}
+            style={{ ...styles.imageWrapper, width: imageWidth, height: imageWidth, margin: imageMargin / 2 }}
+          >
+            <View style={{ ...styles.imageWrapper,  width: '100%', height: '100%' }}>
+              <Image source={{ uri: imageUrl.url }} style={styles.image} />
+            </View>
+          </TouchableOpacity>
+          <DownloadPhotoButton folder={imageUrl.folder} fileName={imageUrl.name} photoID={`photo_${index}`} />
+          <DeletePhotoButton folder={imageUrl.folder} fileName={imageUrl.name} />
+          </View>
+        ))}
+      </View>
+    );
+
+    if (imageUrls.length === 0) {
+      return (
+        <View style={styles.content}>
+          <Text style={styles.noImageText}>No Images</Text>
+        </View>
+      );
+    }
 
     if (loading) {
       return <ActivityIndicator />;
     }
 
     const titleComponent = (
-      <View style={styles.content}>
-        <Text style={styles.title}>{currentFolder}</Text>
+      <View style={styles.backContainer}>
+        <Button style={styles.backButton} title="Back" onPress={() => this.props.navigation.goBack()} />
+        <Text style={styles.photosTitle}>{currentFolder}</Text>
+        <View style={{ flex: 1 }} />
       </View>
     );
 
     return (
       <View>
-        <ReturnURL titleComponent={titleComponent} rows={rows} currentFolder={{ currentFolder }} />
+        <ReturnURL titleComponent={titleComponent} rows={rows} currentFolder={currentFolder} />
       </View>
     );
   }

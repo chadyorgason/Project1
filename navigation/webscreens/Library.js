@@ -7,7 +7,7 @@ export default function LibraryScreen({ navigation }) {
   return (
     <View style={styles.container}>
 
-        <SideBar></SideBar>
+        {/* <SideBar navigation={navigation}/> */}
 
         <View style={styles.content}>
             <Text

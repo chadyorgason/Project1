@@ -8,7 +8,7 @@ import { fetchImages } from './GetImages';
 import PhotoGallery from './DisplayImages';
 import { styles } from '../assets/styles/styles';
 
-export const CallImages = ( galleryName ) => {
+export const CallImages = ( galleryName, navigation ) => {
     const [imageUrls, setImageUrls] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -38,7 +38,7 @@ export const CallImages = ( galleryName ) => {
 
     return (
         <View>
-            <PhotoGallery imageUrls={imageUrls} styles={styles} />
+            <PhotoGallery imageUrls={imageUrls} styles={styles} navigation={navigation}/>
         </View>
     );
 };

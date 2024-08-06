@@ -10,9 +10,9 @@ export default function HomeScreen({ navigation }) {
 
   return (
 
-    <View style={styles.container}>
+    // <View style={styles.container}>
         
-      <SideBar/>
+      // <SideBar navigation={navigation}/>
 
       <View style={styles.content}>
         <ScrollView>
@@ -20,7 +20,7 @@ export default function HomeScreen({ navigation }) {
         </ScrollView>
         
       </View>
-    </View>
+    // </View>
     
   );
 }

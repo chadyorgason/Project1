@@ -1,32 +1,29 @@
 // Shows the sidebar including the Modal component which shows the new gallery button
 
 import React from 'react';
-import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { View, Text, TouchableOpacity } from 'react-native';
-import Card from './DisplayImages';
-import CreateNewGallery from './CreateGalleryComponents/CreateGallery';
-import CreateGalleryModal from './CreateGalleryComponents/NewGallerySetup';
 import Modal from './CreateGalleryComponents/Modal';
 import { sidebarStyles } from '../assets/styles/sidebarStyles';
 
-const SideBar = () => {
+const SideBar = ({ navigation }) => {
   return (
-    <SafeAreaView style={sidebarStyles.container}>
+    // <SafeAreaView style={sidebarStyles.container}>
       <View style={sidebarStyles.sidebar}>
-        <TouchableOpacity onPress={() => console.log('Navigate to Dashboard')}>
-          <Text style={sidebarStyles.sidebarItem}>Dashboard</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <Text style={sidebarStyles.sidebarItem}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => console.log('Navigate to Profile')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Library')}>
+          <Text style={sidebarStyles.sidebarItem}>Library</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
           <Text style={sidebarStyles.sidebarItem}>Profile</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => console.log('Navigate to Settings')}>
-          <Text style={sidebarStyles.sidebarItem}>Settings</Text>
         </TouchableOpacity>
 
         <Modal/>
 
       </View>
-    </SafeAreaView>
+    // </SafeAreaView>
   );
 };
 

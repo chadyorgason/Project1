@@ -1,9 +1,9 @@
 import React from 'react';
 import { DownloadImage } from './DownloadImage';
 
-const DownloadPhotoButton = ({ photoUrl, folder, fileName, photoID }) => {
+const DownloadPhotoButton = ({ folder, fileName, photoID }) => {
   const handleDownload = () => {
-    DownloadImage({ photoUrl, folder, fileName, photoID })
+    DownloadImage({ folder, fileName, photoID })
   };
 
   return (

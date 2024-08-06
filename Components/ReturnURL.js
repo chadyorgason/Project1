@@ -23,7 +23,7 @@ class ReturnURL extends Component {
     console.log(currentFolder)
     console.log(this.props)
 
-    SharedLink(thisFolder)
+    SharedLink(currentFolder)
       .then((url) => {
         this.setState({ shareableURL: url, loading: false });
       })

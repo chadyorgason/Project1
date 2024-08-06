@@ -1,9 +1,15 @@
 // Used by most screens and components
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet,Dimensions } from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+const numberOfColumns = 5;
+const imageMargin = 20;
+const imageWidth = (windowWidth * 0.75 - (numberOfColumns + 1) * imageMargin) / numberOfColumns;
 
 export const styles = StyleSheet.create({
     container: {
+        display: 'flex',
         flex: 1,
         flexDirection: 'row',
         backgroundColor: '#f0f0f0'
@@ -27,87 +33,120 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
     },
     imageContainer: {
-        flexDirection: 'row', // Display images side by side
-        marginVertical: 10,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'flex-start', // Align items to the start of the row
+        padding: 20, // Adjust if needed for spacing within the container
+      },
+      imageWrapper: {
+        position: 'relative',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 5, // Adjust this to control the spacing between images
+      },
+      image: {
+        width: '100%', // Make the image take the full width of the wrapper
+        height: '100%', // Maintain the aspect ratio by making height equal to width
+        borderRadius: 20,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 2,
+          height: 2,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+        elevation: 5,
+        overflow: 'hidden',
+      },
+      greyImage: {
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#ccc',
+        borderRadius: 20,
+      },
+    // imageContainer: {
+    //     flexDirection: 'row',
+    //     flexWrap: 'wrap', // Enable wrapping
+    //     // justifyContent: 'center', // Center items horizontally
+    // },
+    // imageWrapper: {
+    //     position: 'relative',
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    //     width: imageWidth, // Width based on the number of columns
+    //     margin: imageMargin, // Adjust this to control the spacing between images
+    // },
+    // image: {
+    //     width: '100%', // Make the image take the full width of the wrapper
+    //     height: imageWidth, // Maintain the aspect ratio by making height equal to width
+    //     borderRadius: 20,
+    //     shadowColor: '#000',
+    //     shadowOffset: {
+    //         width: 2,
+    //         height: 2,
+    //     },
+    //     shadowOpacity: 0.5,
+    //     shadowRadius: 5,
+    //     elevation: 5,
+    //     overflow: 'hidden',
+    // },
+    shine: {
+        position: 'absolute',
+        width: '80%',
+        height: '8%',
+        top: 10,
+        left: 0,
+        right: 0,
+        marginHorizontal: 'auto',
+        backgroundColor: 'rgba(255, 255, 255, 0.75)',
+        zIndex: 1,
+        borderRadius: 20,
     },
-    imageWrapper: {
-      position: 'relative',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flex: 1,
-  },
-  image: {
-      width: 200,
-      height: 200,
-      marginLeft: 10,
-      marginRight: 10,
-      borderRadius: 20,
-      shadowColor: '#000',
-      shadowOffset: {
-          width: 2, // Shadow to the right
-          height: 2, // Shadow below
-      },
-      shadowOpacity: 0.5, // Adjust the opacity of the shadow
-      shadowRadius: 5, // Adjust the radius of the shadow
-      elevation: 5, // Android elevation for shadow effect
-      overflow: 'hidden',
-  },
-  shine: {
-      position: 'absolute',
-      width: '80%',
-      height: '8%',
-      top: 10,
-      left: 0,
-      right: 0,
-      marginHorizontal: 'auto',
-      backgroundColor: 'rgba(255, 255, 255, 0.75)',
-      zIndex: 1,
-      borderRadius: 20,
-  },
-  imgTitle: {
-      position: 'absolute',
-      top: 10,
-      textAlign: 'center',
-      zIndex: 1,
-  },  
-  greyImage: {
-    backgroundColor: '#ccc', // Grey background color
-    width: 200,
-      height: 200,
-      marginLeft: 10,
-      marginRight: 10,
-      borderRadius: 20,
-      shadowColor: '#000',
-      shadowOffset: {
-          width: 2, // Shadow to the right
-          height: 2, // Shadow below
-      },
-      shadowOpacity: 0.5, // Adjust the opacity of the shadow
-      shadowRadius: 5, // Adjust the radius of the shadow
-      elevation: 5, // Android elevation for shadow effect
-      overflow: 'hidden',
-  },
-  noImagesText: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: [{ translateX: '-50%' }, { translateY: '-50%' }],
-    textAlign: 'center',
-    color: 'grey',
-    //fontWeight: 'bold',
-    fontSize: 16,
-  },
-  noImageText: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: [{ translateX: '-50%' }, { translateY: '-50%' }],
-    textAlign: 'center',
-    color: 'grey',
-    //fontWeight: 'bold',
-    fontSize: 14,
-    paddingTop: 300,
-  },
+    imgTitle: {
+        position: 'absolute',
+        top: 10,
+        textAlign: 'center',
+        zIndex: 1,
+        fontSize: imageWidth / 15
+    },  
+    // greyImage: {
+    //     backgroundColor: '#ccc', // Grey background color
+    //     width: '100%',
+    //     height: imageWidth,
+    //     marginLeft: 10,
+    //     marginRight: 10,
+    //     borderRadius: 20,
+    //     shadowColor: '#000',
+    //     shadowOffset: {
+    //         width: 2, // Shadow to the right
+    //         height: 2, // Shadow below
+    //     },
+    //     shadowOpacity: 0.5, // Adjust the opacity of the shadow
+    //     shadowRadius: 5, // Adjust the radius of the shadow
+    //     elevation: 5, // Android elevation for shadow effect
+    //     overflow: 'hidden',
+    // },
+    noImagesText: {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: [{ translateX: '-50%' }, { translateY: '-50%' }],
+        textAlign: 'center',
+        color: 'grey',
+        //fontWeight: 'bold',
+        fontSize: 16,
+    },
+    noImageText: {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: [{ translateX: '-50%' }, { translateY: '-50%' }],
+        textAlign: 'center',
+        color: 'grey',
+        //fontWeight: 'bold',
+        fontSize: 14,
+        paddingTop: 300,
+    },
     description: {
         textAlign: 'center',
         marginBottom: 20,
@@ -145,7 +184,23 @@ export const styles = StyleSheet.create({
         //backgroundColor: '#28a745', // Use your chosen color here
     },
     backButton: {
-        alignItems: 'left',
+        justifyContent: 'flex-start',
+    },
+    backContainer: {
+        display: 'flex',
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: '#f0f0f0',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 10,
+        marginTop: 20,
+    },
+    photosTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        flex: 12,
     },
     copybutton: {
         backgroundColor: '#f0f0f0',
@@ -179,4 +234,18 @@ export const styles = StyleSheet.create({
         color: 'black',
         fontSize: 12,
     },
+    headerContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 16,
+        paddingVertical: 20,
+        backgroundColor: '#fffff', // Header background color
+        elevation: 4, // For Android shadow
+        shadowColor: '#000', // For iOS shadow
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        width: windowWidth
+      }
 });
