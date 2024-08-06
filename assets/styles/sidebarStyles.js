@@ -3,12 +3,14 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
+// const { wWidth } = useWindowDimensions();
 console.log('width', windowWidth)
+console.log('sideBar', windowWidth * 0.3)
 
 export const sidebarStyles = StyleSheet.create({
     container: {
       flex: 1,
-      width: windowWidth * 0.3, // 20% of the window width
+      width: 10,
     },
     sidebar: {
       flex: 1,
@@ -17,6 +19,8 @@ export const sidebarStyles = StyleSheet.create({
       paddingHorizontal: 10,
       justifyContent: 'flex-start',
       alignItems: 'flex-start',
+      maxWidth: windowWidth * 0.2,
+      minWidth: windowWidth * 0.2
     },
     sidebarItem: {
       color: '#fff', // Text color for sidebar items

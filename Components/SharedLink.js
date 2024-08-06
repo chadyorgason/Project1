@@ -14,6 +14,7 @@ const SharedLink = async (folder) => {
   };
 
   const thisFolder = folder;
+  console.log(folder)
 
   if (thisFolder != '') {
     AWS.config.update({

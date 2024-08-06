@@ -8,6 +8,8 @@ import MobileMain from './navigation/MobileMain';
 import { Platform } from 'react-native';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ViewPage from './Components/ViewOnlyComponents/ViewPage';
+import WebTest from './navigation/WebTest';
+import { AppTest } from 'aws-sdk';
 
 function App() {
   return(
@@ -29,7 +31,7 @@ const AppsTest = () => (
       {/* Route with URL parameters */}
       <Route path="/view-photos/:parameter1/" element={<ViewPage />} />
       {/* Route for when "/view" parameter is not present */}
-      <Route path="/" element={<WebMain />} />
+      <Route path="/" element={<WebTest />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   </Router>

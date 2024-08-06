@@ -14,7 +14,7 @@ export default function ViewPage() {
     useEffect(() => {
         const fetchFolderName = async () => {
             try {
-                const result = await ReturnFolder({folderToken});
+                const result = await ReturnFolder({folderToken}, true);
                 setFolderName(result);
             } catch (error) {
                 console.error('Error fetching folder:', error);

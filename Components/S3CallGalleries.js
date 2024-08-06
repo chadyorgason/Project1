@@ -6,7 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import { fetchFolders } from './FetchFolders';
-import { renderGalleries } from './Galleries';
+import Galleries from './Galleries'
 
 const Gallery = ({ styles, navigation }) => {
   const [folderNames, setFolderNames] = useState([]);
@@ -26,7 +26,7 @@ const Gallery = ({ styles, navigation }) => {
 
   return (
     <View>
-      {renderGalleries(folderNames, styles, navigation)}
+      <Galleries folderNames={folderNames} styles={styles} navigation={navigation}/>
     </View>
   );
 };

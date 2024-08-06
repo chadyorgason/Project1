@@ -2,11 +2,11 @@
 import { FindFolder } from "./FindFolder";
 
 // Refactor ReturnFolder to be a regular function that returns a promise
-export const ReturnFolder = async (folderToken) => {
+export const ReturnFolder = async (folderToken, viewOnly = false) => {
     const thisToken = folderToken.folderToken;
 
     try {
-        const folder = await FindFolder(thisToken);
+        const folder = await FindFolder(thisToken, viewOnly);
         return folder;
     } catch (error) {
         console.error('Error:', error);
