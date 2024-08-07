@@ -30,7 +30,7 @@ class Galleries extends Component {
     const { folderNames, styles, navigation } = this.props;
     const { dimensions } = this.state;
 
-    const numberOfColumns = 5; // Adjust this to the desired number of columns
+    const numberOfColumns = 4; // Adjust this to the desired number of columns
     const imageMargin = 20;
     const imageWidth = (dimensions.width * 0.75 - (numberOfColumns + 1) * imageMargin) / numberOfColumns;
 
@@ -44,14 +44,14 @@ class Galleries extends Component {
           <View style={{ ...styles.imageWrapper, width: '100%', height: '100%' }}>
             <Image source={{ uri: folder.firstUrl }} style={styles.greyImage} />
             <View style={styles.shine} />
-            <Text style={styles.imgTitle}>{folder.folder}</Text>
+            <Text style={{ ...styles.imgTitle, fontSize: imageWidth / 15 }}>{folder.folder}</Text>
             <Text style={styles.noImagesText}>No Images</Text>
           </View>
         ) : (
           <View style={{ ...styles.imageWrapper,  width: '100%', height: '100%' }}>
             <Image source={{ uri: folder.firstUrl }} style={styles.image} />
             <View style={styles.shine} />
-            <Text style={styles.imgTitle}>{folder.folder}</Text>
+            <Text style={{ ...styles.imgTitle, fontSize: imageWidth / 15 }}>{folder.folder}</Text>
           </View>
         )}
       </TouchableOpacity>
