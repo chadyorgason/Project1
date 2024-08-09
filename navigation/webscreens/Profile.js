@@ -1,11 +1,7 @@
-// import * as React from 'react';
-// import { View, Text, StyleSheet, Button } from 'react-native';
-//import ListLoads from '../../Components/ListLoads';
-
 import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 
-export default function MediaScreen({ navigation }) {
+export default function ProfileScreen({ navigation }) {
   return (
     <ScrollView style={styles.container}>
       {/* Cover Photo */}
@@ -92,14 +88,3 @@ const styles = StyleSheet.create({
     color: '#666',
   },
 });
-
-
-
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//         <Text
-//         onPress={() => navigation.naviate('Home')}
-//         style={{ fontSize: 26, fontWeight: 'bold' }}>Media Screen</Text>    
-//     </View>
-//   );
-// };

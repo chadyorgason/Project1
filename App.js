@@ -6,10 +6,14 @@ import * as React from 'react';
 import WebMain from './navigation/WebMain';
 import MobileMain from './navigation/MobileMain';
 import { Platform } from 'react-native';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import ViewPage from './Components/ViewOnlyComponents/ViewPage';
-import WebTest from './navigation/WebTest';
 import { AppTest } from 'aws-sdk';
+import LibraryScreen from './navigation/webscreens/Library';
+import ProfileScreen from './navigation/webscreens/Profile';
+import { homeStack } from './navigation/WebMain';
+import { libraryStack } from './navigation/WebMain';
+import { profileStack } from './navigation/WebMain';
 
 function App() {
   return(
@@ -31,7 +35,10 @@ const AppsTest = () => (
       {/* Route with URL parameters */}
       <Route path="/view-photos/:parameter1/" element={<ViewPage />} />
       {/* Route for when "/view" parameter is not present */}
-      <Route path="/" element={<WebTest />} />
+      <Route path="/" element={<WebMain stack={homeStack} />} />
+      <Route path="/home" element={<Navigate to="/" />} />
+      <Route path="/library" element={<WebMain stack={libraryStack} />} />
+      <Route path="/profile" element={<WebMain stack={profileStack} />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   </Router>

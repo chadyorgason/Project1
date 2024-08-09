@@ -193,8 +193,10 @@ export const styles = StyleSheet.create({
         backgroundColor: '#f0f0f0',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 10,
+        marginBottom: 20,
         marginTop: 20,
+        marginLeft: 20,
+        marginRight: 20
     },
     photosTitle: {
         fontSize: 24,
@@ -236,16 +238,26 @@ export const styles = StyleSheet.create({
     },
     headerContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start', // Center the logo horizontally
         alignItems: 'center',
         paddingHorizontal: 16,
-        paddingVertical: 20,
-        backgroundColor: '#fffff', // Header background color
+        paddingVertical: 10, // Adjust padding to reduce header height
+        backgroundColor: '#ffffff', // Corrected background color
         elevation: 4, // For Android shadow
         shadowColor: '#000', // For iOS shadow
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
-        width: windowWidth
-      }
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.8,
+        shadowRadius: 5,
+        width: '100%',
+        height: 60, // Slightly increase height for better fit
+      },
+      logo: {
+        height: 40, // Set a specific height for the logo
+        width: 150, // Set a width that keeps the aspect ratio
+        resizeMode: 'contain', // Ensure the image scales properly
+      },
+    main: {
+        flex: 1,
+        flexDirection: 'column'
+    }
 });

@@ -45,7 +45,7 @@ class Galleries extends Component {
             <Image source={{ uri: folder.firstUrl }} style={styles.greyImage} />
             <View style={styles.shine} />
             <Text style={{ ...styles.imgTitle, fontSize: imageWidth / 15 }}>{folder.folder}</Text>
-            <Text style={styles.noImagesText}>No Images</Text>
+            <Text style={{ ...styles.noImagesText, fontSize: imageWidth / 12 }}>No Images</Text>
           </View>
         ) : (
           <View style={{ ...styles.imageWrapper,  width: '100%', height: '100%' }}>
