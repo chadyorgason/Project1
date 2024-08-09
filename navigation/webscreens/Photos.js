@@ -12,15 +12,9 @@ export default function PhotosScreen({ navigation, route }) {
     
   return (
     <View style={styles.container}>
-
-        {/* <SideBar/> */}
-
         
           <View style={styles.content}>
             <ScrollView>
-              {/* <View style={styles.leftColumn}>
-                <Button style={styles.backButton} title="Back" onPress={() => navigation.goBack()} />
-              </View> */}
               {CallImages(folderName, navigation)}
             </ScrollView>
           </View>

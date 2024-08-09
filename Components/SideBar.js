@@ -10,13 +10,13 @@ const SideBar = ({ navigation }) => {
   return (
     // <SafeAreaView style={sidebarStyles.container}>
       <View style={sidebarStyles.sidebar}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity onPress={() => navigation.navigate('home')}>
           <Text style={sidebarStyles.sidebarItem}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Library')}>
+        <TouchableOpacity onPress={() => navigation.navigate('library')}>
           <Text style={sidebarStyles.sidebarItem}>Library</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+        <TouchableOpacity onPress={() => navigation.navigate('profile')}>
           <Text style={sidebarStyles.sidebarItem}>Profile</Text>
         </TouchableOpacity>
 

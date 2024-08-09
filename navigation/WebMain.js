@@ -1,115 +1,55 @@
-// Author: Chad Yorgason
-// This is view that will be the base structure of the web pages.
-// We plan to have all the navigation controlled by this view.
-// We use stack navigation and a top navigation bar for now
-// We'll probably implement sidebar navigation too
-
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { View, Text } from 'react-native';
+import SideBar from '../Components/SideBar';
 
 // Screens
 import LibraryScreen from './webscreens/Library';
 import HomeScreen from './webscreens/Home';
-import MediaScreen from './webscreens/Media';
 import PhotosScreen from './webscreens/Photos';
-// import ViewOnlyPage from '../Components/ViewOnlyGallery';
+import ProfileScreen from './webscreens/Profile';
+import { styles } from '../assets/styles/styles';
+import HeaderBar from '../Components/HeaderBar';
 
-export default function WebMain() {
-
-
+export default function WebTest({stack}) {
+  console.log(stack)
   return (
-
-    <NavigationContainer>
-        
-        <Tab.Navigator
-            initialRouteName={homeName}
-            screenOptions={{headerShown: false}}
-            BottomTabNavigationOptions={{
-                tabBarInactiveTintColor: "grey",
-                tabBarLabelStyle: {
-                  fontSize: 10
-                },
-                tabBarStyle: [
-                  {
-                    display: "flex",
-                    flexDirection: 'row',
-                    justifyContent: 'flex-start',
-                    paddingTop: 0,
-                  },
-                  null
-                ]
-              }}>
-
-            <Tab.Screen name={homeName} component={HomeStack}/>
-            <Tab.Screen name={libraryName} component={LibraryStack}/>
-            <Tab.Screen name={MediaName} component={MediaScreen}/>
-            {/* <Tab.Screen name="DisplayPage" component={ViewStack} /> */}
-
-        </Tab.Navigator>
-    </NavigationContainer>
-
-
+    <View style={styles.main}>
+      <HeaderBar />
+      <View style={styles.container}>
+        <SideBar navigation={navigation}/>
+        <NavigationContainer>
+            <Stack.Navigator screenOptions={{ headerShown: false, headerLeft: () => null }}>
+                <Stack.Screen name="home" component={stack} />
+                {/* <Stack.Screen name="library" component={libraryStack} />
+                <Stack.Screen name="profile" component={profileStack} /> */}
+            </Stack.Navigator>
+        </NavigationContainer>
+      </View>
+    </View>
   );
 }
 
-
-// Screen Names
-const homeName = 'Home';
-const libraryName = 'Library';
-const MediaName = 'Media';
-
-//const Tab = createBottomTabNavigator();
-
-//const Stack = createStackNavigator();
-
-const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
 
-
-const Tab1 = () => (
-  // Your content for Tab 1
-   <HomeScreen />
+export const homeStack = () => (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Galleries" component={HomeScreen} />
+        <Stack.Screen name="Photos" component={PhotosScreen} />
+    </Stack.Navigator>
 );
 
-const Tab2 = () => (
-  // Your content for Tab 2
-  <ProfileScreen />
-);
-
-const TopTabsNavigator = () => (
-  <Tab.Navigator>
-    <Tab.Screen name="Settings" component={SearchStack} />
-    <Tab.Screen name="Home" component={Tab1} />
-    <Tab.Screen name="Profile" component={Tab2} />
-  </Tab.Navigator>
-);
-
-const HomeStack = () => (
-  <Stack.Navigator screenOptions={{
-      headerShown: true,
-      headerTitleStyle: {
-          color: '#000000',
-        },
-    }}>
-      <Stack.Screen name="Galleries" component={HomeScreen} 
-        options={{ headerShown: false}} />
-      <Stack.Screen name="Photos" component={PhotosScreen} 
-        options={{ headerShown: false}} />
+export const libraryStack = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="Library" component={LibraryScreen} />
+    {/* Add more screens for Library stack */}
   </Stack.Navigator>
 );
 
-const LibraryStack = () => (
-  <Stack.Navigator screenOptions={{
-      headerShown: true,
-      headerTitleStyle: {
-          color: '#000000',
-        },
-    }}>
-      <Stack.Screen name="Library" component={LibraryScreen} 
-        options={{ headerShown: false}} />
-      <Stack.Screen name="ViewOnlyGallery" component={HomeScreen} 
-        options={{ headerShown: false}} />
+export const profileStack = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="Profile" component={ProfileScreen} />
+    {/* Add more screens for Library stack */}
   </Stack.Navigator>
 );
