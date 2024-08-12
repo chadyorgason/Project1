@@ -3,6 +3,8 @@ import { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_VIEWONLY_ACCESS_KEY_ID, A
 
 export const FindFolder = (token, viewOnly) => {
     const thisToken = token;
+
+    console.log('viewonly', viewOnly)
     console.log('viewonly', viewOnly)
 
     return new Promise((resolve, reject) => {

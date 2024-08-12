@@ -13,10 +13,9 @@ import { styles } from '../assets/styles/styles';
 import HeaderBar from '../Components/HeaderBar';
 
 export default function WebTest({stack}) {
-  console.log(stack)
   return (
     <View style={styles.main}>
-      <HeaderBar />
+      <HeaderBar navigation={navigation}/>
       <View style={styles.container}>
         <SideBar navigation={navigation}/>
         <NavigationContainer>
@@ -33,21 +32,21 @@ export default function WebTest({stack}) {
 
 const Stack = createStackNavigator();
 
-export const homeStack = () => (
+export const HomeStack = () => (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Galleries" component={HomeScreen} />
         <Stack.Screen name="Photos" component={PhotosScreen} />
     </Stack.Navigator>
 );
 
-export const libraryStack = () => (
+export const LibraryStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="Library" component={LibraryScreen} />
     {/* Add more screens for Library stack */}
   </Stack.Navigator>
 );
 
-export const profileStack = () => (
+export const ProfileStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="Profile" component={ProfileScreen} />
     {/* Add more screens for Library stack */}
