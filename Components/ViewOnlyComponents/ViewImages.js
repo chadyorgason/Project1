@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import { fetchImages } from './FetchImages';
 import { styles } from '../../assets/styles/styles';
-import { ViewRender } from './ViewRender';
+import ViewRender from './ViewRender';
 
 class ViewImages extends Component {
     constructor(props) {
@@ -45,7 +45,7 @@ class ViewImages extends Component {
         return (
             <View>
                 {imageUrls.length > 0 ? (
-                    ViewRender(imageUrls, styles)
+                    <ViewRender imageUrls={imageUrls} styles={styles}/>
                 ) : (
                     <Text>No images found</Text>
                 )}

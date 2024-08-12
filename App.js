@@ -11,9 +11,9 @@ import ViewPage from './Components/ViewOnlyComponents/ViewPage';
 import { AppTest } from 'aws-sdk';
 import LibraryScreen from './navigation/webscreens/Library';
 import ProfileScreen from './navigation/webscreens/Profile';
-import { homeStack } from './navigation/WebMain';
-import { libraryStack } from './navigation/WebMain';
-import { profileStack } from './navigation/WebMain';
+import { HomeStack } from './navigation/WebMain';
+import { LibraryStack } from './navigation/WebMain';
+import { ProfileStack } from './navigation/WebMain';
 
 function App() {
   return(
@@ -35,10 +35,10 @@ const AppsTest = () => (
       {/* Route with URL parameters */}
       <Route path="/view-photos/:parameter1/" element={<ViewPage />} />
       {/* Route for when "/view" parameter is not present */}
-      <Route path="/" element={<WebMain stack={homeStack} />} />
+      <Route path="/" element={<WebMain stack={HomeStack} />} />
       <Route path="/home" element={<Navigate to="/" />} />
-      <Route path="/library" element={<WebMain stack={libraryStack} />} />
-      <Route path="/profile" element={<WebMain stack={profileStack} />} />
+      <Route path="/library" element={<WebMain stack={LibraryStack} />} />
+      <Route path="/profile" element={<WebMain stack={ProfileStack} />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   </Router>

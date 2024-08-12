@@ -41,7 +41,7 @@ const SharedLink = async (folder) => {
         if (data.Items.length > 0) {
             console.log('Gallery already exists in the table');
             const randomToken = data.Items[0].PicPortal.S;
-            const shareableURL = `http://localhost:19006/view-photos/${randomToken}`;
+            const shareableURL = `http://localhost:8081/view-photos/${randomToken}`;
             console.log(shareableURL);
             return shareableURL;
         } else {

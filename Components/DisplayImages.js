@@ -62,25 +62,32 @@ class PhotoGallery extends Component {
       </View>
     );
 
-    if (imageUrls.length === 0) {
-      return (
-        <View style={styles.content}>
-          <Text style={styles.noImageText}>No Images</Text>
-        </View>
-      );
-    }
-
     if (loading) {
       return <ActivityIndicator />;
     }
 
+    const noImagesComponent = (
+      <View style={styles.noImages}>
+        <Text>No Images</Text>
+      </View>
+    );
+
     const titleComponent = (
-      <View style={styles.backContainer}>
+      <View style={{...styles.backContainer, minWidth: dimensions.width * 0.75 }}>
         <Button style={styles.backButton} title="Back" onPress={() => this.props.navigation.goBack()} />
         <Text style={styles.photosTitle}>{currentFolder}</Text>
         <View style={{ flex: 1 }} />
       </View>
     );
+
+    if (imageUrls.length < 2) {
+      return (
+        <View>
+          {titleComponent}
+          {noImagesComponent}
+        </View>
+      );
+    }
 
     return (
       <View>

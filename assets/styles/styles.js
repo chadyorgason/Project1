@@ -136,17 +136,12 @@ export const styles = StyleSheet.create({
         //fontWeight: 'bold',
         fontSize: 16,
     },
-    // noImageText: {
-    //     position: 'absolute',
-    //     top: '50%',
-    //     left: '50%',
-    //     transform: [{ translateX: '-50%' }, { translateY: '-50%' }],
-    //     textAlign: 'center',
-    //     color: 'grey',
-    //     //fontWeight: 'bold',
-    //     fontSize: 14,
-    //     paddingTop: 300,
-    // },
+    noImages: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 200
+    },
     description: {
         textAlign: 'center',
         marginBottom: 20,
@@ -246,12 +241,12 @@ export const styles = StyleSheet.create({
         elevation: 4, // For Android shadow
         shadowColor: '#000', // For iOS shadow
         shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.8,
+        shadowOpacity: 0.2,
         shadowRadius: 5,
         width: '100%',
         height: 60, // Slightly increase height for better fit
       },
-      logo: {
+    logo: {
         height: 40, // Set a specific height for the logo
         width: 150, // Set a width that keeps the aspect ratio
         resizeMode: 'contain', // Ensure the image scales properly
