@@ -245,6 +245,7 @@ export const styles = StyleSheet.create({
         shadowRadius: 5,
         width: '100%',
         height: 60, // Slightly increase height for better fit
+        zIndex: 10
       },
     logo: {
         height: 40, // Set a specific height for the logo
