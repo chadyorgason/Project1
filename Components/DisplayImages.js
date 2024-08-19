@@ -45,18 +45,17 @@ class PhotoGallery extends Component {
     const rows = (
       <View style={styles.imageContainer}>
         {imageUrls.slice(1).map((imageUrl, index) => (
-          <View>
-          <TouchableOpacity
-            key={index}
-            onPress={() => console.log(imageUrl.folder)}
-            style={{ ...styles.imageWrapper, width: imageWidth, height: imageWidth, margin: imageMargin / 2 }}
-          >
-            <View style={{ ...styles.imageWrapper,  width: '100%', height: '100%' }}>
-              <Image source={{ uri: imageUrl.url }} style={styles.image} />
-            </View>
-          </TouchableOpacity>
-          <DownloadPhotoButton folder={imageUrl.folder} fileName={imageUrl.name} photoID={`photo_${index}`} />
-          <DeletePhotoButton folder={imageUrl.folder} fileName={imageUrl.name} />
+          <View key={index}>
+            <TouchableOpacity
+              onPress={() => console.log(imageUrl.folder)}
+              style={{ ...styles.imageWrapper, width: imageWidth, height: imageWidth, margin: imageMargin / 2 }}
+            >
+              <View style={{ ...styles.imageWrapper,  width: '100%', height: '100%' }}>
+                <Image source={{ uri: imageUrl.url }} style={styles.image} />
+              </View>
+            </TouchableOpacity>
+            <DownloadPhotoButton folder={imageUrl.folder} fileName={imageUrl.name} photoID={`photo_${index}`} />
+            <DeletePhotoButton folder={imageUrl.folder} fileName={imageUrl.name} />
           </View>
         ))}
       </View>

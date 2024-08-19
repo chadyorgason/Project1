@@ -14,8 +14,12 @@ class Galleries extends Component {
     };
   }
 
+  lastPress = 0;
+  mounted = false;
+
   componentDidMount() {
     Dimensions.addEventListener('change', this.handleResize);
+    this.mounted = true
   }
 
   componentWillUnmount() {
@@ -24,6 +28,23 @@ class Galleries extends Component {
 
   handleResize = () => {
     this.setState({ dimensions: Dimensions.get('window') });
+  };
+
+  handleDoubleClick = (folder) => {
+    if (this.mounted) {
+      const time = new Date().getTime();
+      const delta = time - this.lastPress;
+      console.log(time, delta);
+
+      if (delta < 300) {
+        // Double-click detected
+        console.log('Double-click detected');
+        this.props.navigation.navigate('Photos', { folderName: folder });
+      }
+
+      // Update the last press time
+      this.lastPress = time;
+    }
   };
 
   renderGalleries = () => {
@@ -37,7 +58,7 @@ class Galleries extends Component {
     return folderNames.map((folder, index) => (
       <TouchableOpacity
         key={index}
-        onPress={() => navigation.navigate('Photos', { folderName: folder.folder })}
+        onPress={() => this.handleDoubleClick(folder.folder)}
         style={{ ...styles.imageWrapper, width: imageWidth, height: imageWidth, margin: imageMargin / 2 }}
       >
         {folder.firstUrl.endsWith('None') ? (
@@ -75,61 +96,3 @@ class Galleries extends Component {
 }
 
 export default Galleries;
-
-
-
-
-
-
-
-// import { View, Text, Image, TouchableOpacity } from 'react-native';
-
-// export const renderGalleries = (folderNames, styles, navigation) => {
-
-//   const folderNamesHere = folderNames;
-//   const rows = [];
-
-//     for (let i = 0; i < folderNamesHere.length; i += 4) {
-//       const rowPhotos = folderNamesHere.slice(i, i + 4);
-
-//       const row = (
-//         <View key={i} style={styles.imageContainer}>
-//           {rowPhotos.map((folder, index) => (
-//             <TouchableOpacity key={index} onPress={() => navigation.navigate('Photos', { folderName: folder.folder })}>
-//               {folder.firstUrl.endsWith('None') ? (
-//                 <View style={styles.imageWrapper}>
-//                   <Image source={{ uri: folder.firstUrl }} style={styles.greyImage} />
-//                   <View style={styles.shine} />
-//                   <Text style={styles.imgTitle}>{folder.folder}</Text>
-//                   <Text style={styles.noImagesText}>No Images</Text>
-//                 </View>
-//               ) : (
-//                 <View style={styles.imageWrapper}>
-//                   <Image source={{ uri: folder.firstUrl }} style={styles.image} />
-//                   <View style={styles.shine} />
-//                   <Text style={styles.imgTitle}>{folder.folder}</Text>
-//                 </View>
-//               )}
-//             </TouchableOpacity>
-//           ))}
-//         </View>
-//       );
-
-//       rows.push(row);
-
-//     }
-
-
-//   const titleComponent = (
-//     <View style={styles.content}>
-//       <Text style={styles.title}>Galleries</Text>
-//     </View>
-// );
-
-//   return (
-//     <View>
-//       {titleComponent}
-//       {rows}
-//     </View>
-//   );
-// };

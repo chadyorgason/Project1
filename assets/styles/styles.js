@@ -37,59 +37,33 @@ export const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'flex-start', // Align items to the start of the row
         padding: 20, // Adjust if needed for spacing within the container
-      },
-      imageWrapper: {
+    },
+    imageWrapper: {
         position: 'relative',
         justifyContent: 'center',
         alignItems: 'center',
         margin: 5, // Adjust this to control the spacing between images
-      },
-      image: {
+    },
+    image: {
         width: '100%', // Make the image take the full width of the wrapper
         height: '100%', // Maintain the aspect ratio by making height equal to width
         borderRadius: 20,
         shadowColor: '#000',
         shadowOffset: {
-          width: 2,
-          height: 2,
+            width: 2,
+            height: 2,
         },
         shadowOpacity: 0.5,
         shadowRadius: 5,
         elevation: 5,
         overflow: 'hidden',
-      },
-      greyImage: {
+    },
+    greyImage: {
         width: '100%',
         height: '100%',
         backgroundColor: '#ccc',
         borderRadius: 20,
-      },
-    // imageContainer: {
-    //     flexDirection: 'row',
-    //     flexWrap: 'wrap', // Enable wrapping
-    //     // justifyContent: 'center', // Center items horizontally
-    // },
-    // imageWrapper: {
-    //     position: 'relative',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     width: imageWidth, // Width based on the number of columns
-    //     margin: imageMargin, // Adjust this to control the spacing between images
-    // },
-    // image: {
-    //     width: '100%', // Make the image take the full width of the wrapper
-    //     height: imageWidth, // Maintain the aspect ratio by making height equal to width
-    //     borderRadius: 20,
-    //     shadowColor: '#000',
-    //     shadowOffset: {
-    //         width: 2,
-    //         height: 2,
-    //     },
-    //     shadowOpacity: 0.5,
-    //     shadowRadius: 5,
-    //     elevation: 5,
-    //     overflow: 'hidden',
-    // },
+    },
     shine: {
         position: 'absolute',
         width: '80%',
@@ -109,23 +83,6 @@ export const styles = StyleSheet.create({
         zIndex: 1,
         fontSize: imageWidth / 15
     },  
-    // greyImage: {
-    //     backgroundColor: '#ccc', // Grey background color
-    //     width: '100%',
-    //     height: imageWidth,
-    //     marginLeft: 10,
-    //     marginRight: 10,
-    //     borderRadius: 20,
-    //     shadowColor: '#000',
-    //     shadowOffset: {
-    //         width: 2, // Shadow to the right
-    //         height: 2, // Shadow below
-    //     },
-    //     shadowOpacity: 0.5, // Adjust the opacity of the shadow
-    //     shadowRadius: 5, // Adjust the radius of the shadow
-    //     elevation: 5, // Android elevation for shadow effect
-    //     overflow: 'hidden',
-    // },
     noImagesText: {
         position: 'absolute',
         top: '50%',
@@ -156,17 +113,17 @@ export const styles = StyleSheet.create({
         marginBottom: 10,
     },
     sidebar: {
-      flex: 1,
-      backgroundColor: '#333', // Sidebar background color
-      paddingVertical: 20,
-      paddingHorizontal: 10,
-      justifyContent: 'flex-start',
-      alignItems: 'flex-start',
+        flex: 1,
+        backgroundColor: '#333', // Sidebar background color
+        paddingVertical: 20,
+        paddingHorizontal: 10,
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
     },
     sidebarItem: {
-      color: '#fff', // Text color for sidebar items
-      fontSize: 18,
-      marginBottom: 15,
+        color: '#fff', // Text color for sidebar items
+        fontSize: 18,
+        marginBottom: 15,
     },
     leftColumn: {
         position: 'absolute',
@@ -245,6 +202,7 @@ export const styles = StyleSheet.create({
         shadowRadius: 5,
         width: '100%',
         height: 60, // Slightly increase height for better fit
+        zIndex: 10
       },
     logo: {
         height: 40, // Set a specific height for the logo
@@ -254,5 +212,10 @@ export const styles = StyleSheet.create({
     main: {
         flex: 1,
         flexDirection: 'column'
+    },
+    center: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center'
     }
 });
