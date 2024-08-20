@@ -10,16 +10,22 @@ class Galleries extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dimensions: Dimensions.get('window')
+      dimensions: Dimensions.get('window'),
+      galleries: props.galleries
     };
+    // this.handleClick = this.handleClick.bind(this);
   }
 
-  lastPress = 0;
-  mounted = false;
-
+  lastClick = 0;
+  
   componentDidMount() {
     Dimensions.addEventListener('change', this.handleResize);
-    this.mounted = true
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.galleries !== this.props.galleries) {
+      this.setState({ galleries: this.props.galleries });
+    }
   }
 
   componentWillUnmount() {
@@ -30,49 +36,56 @@ class Galleries extends Component {
     this.setState({ dimensions: Dimensions.get('window') });
   };
 
-  handleDoubleClick = (folder) => {
-    if (this.mounted) {
-      const time = new Date().getTime();
-      const delta = time - this.lastPress;
-      console.log(time, delta);
+  handleClick(galleryName) {
+    const clickTime = new Date().getTime();
+    const doubleClick = clickTime - this.lastClick;
 
-      if (delta < 300) {
-        // Double-click detected
-        console.log('Double-click detected');
-        this.props.navigation.navigate('Photos', { folderName: folder });
-      }
-
-      // Update the last press time
-      this.lastPress = time;
+    if (doubleClick < 300) {
+      // Double-click detected
+      this.props.navigation.navigate('Photos', { folderName: galleryName });
+      this.setState(prevState => {
+        const updatedGallery = { ...prevState.galleries };
+        updatedGallery[galleryName].selected = false; // Toggle the selected state
+        return { updatedGallery };
+      })
+    } else {
+      this.setState(prevState => {
+        const updatedGallery = { ...prevState.galleries };
+        updatedGallery[galleryName].selected = !updatedGallery[galleryName].selected; // Toggle the selected state
+        return { updatedGallery };
+      });
     }
+
+    // Update the last press time
+    this.lastClick = clickTime;
   };
 
   renderGalleries = () => {
-    const { folderNames, styles, navigation } = this.props;
+    const { galleries, styles } = this.props;
     const { dimensions } = this.state;
 
     const numberOfColumns = 4; // Adjust this to the desired number of columns
     const imageMargin = 20;
     const imageWidth = (dimensions.width * 0.75 - (numberOfColumns + 1) * imageMargin) / numberOfColumns;
 
-    return folderNames.map((folder, index) => (
+    return Object.entries(galleries).map(([galleryName, galleryInfo], index) => (
       <TouchableOpacity
         key={index}
-        onPress={() => this.handleDoubleClick(folder.folder)}
-        style={{ ...styles.imageWrapper, width: imageWidth, height: imageWidth, margin: imageMargin / 2 }}
+        onPress={() => this.handleClick(galleryName)}
+        style={{ width: imageWidth, height: imageWidth, margin: imageMargin / 2 }}
       >
-        {folder.firstUrl.endsWith('None') ? (
-          <View style={{ ...styles.imageWrapper, width: '100%', height: '100%' }}>
-            <Image source={{ uri: folder.firstUrl }} style={styles.greyImage} />
+        {galleryInfo.firstUrl.endsWith('None') ? (
+          <View style={{ ...styles.imageWrapper, width: '100%', height: '100%', borderWidth: galleryInfo.selected ? imageWidth / 40 : 0 }}>
+            <Image source={{ uri: galleryInfo.firstUrl }} style={styles.greyImage} />
             <View style={styles.shine} />
-            <Text style={{ ...styles.imgTitle, fontSize: imageWidth / 15 }}>{folder.folder}</Text>
+            <Text style={{ ...styles.imgTitle, fontSize: imageWidth / 15 }}>{galleryName}</Text>
             <Text style={{ ...styles.noImagesText, fontSize: imageWidth / 12 }}>No Images</Text>
           </View>
         ) : (
-          <View style={{ ...styles.imageWrapper,  width: '100%', height: '100%' }}>
-            <Image source={{ uri: folder.firstUrl }} style={styles.image} />
+          <View style={{ ...styles.imageWrapper,  width: '100%', height: '100%', borderWidth: galleryInfo.selected ? imageWidth / 40 : 0 }}>
+            <Image source={{ uri: galleryInfo.firstUrl }} style={styles.image} />
             <View style={styles.shine} />
-            <Text style={{ ...styles.imgTitle, fontSize: imageWidth / 15 }}>{folder.folder}</Text>
+            <Text style={{ ...styles.imgTitle, fontSize: imageWidth / 15 }}>{galleryName}</Text>
           </View>
         )}
       </TouchableOpacity>

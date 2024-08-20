@@ -43,6 +43,9 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 5, // Adjust this to control the spacing between images
+        padding: 2,
+        borderColor: '#2096f3',
+        borderRadius: 26
     },
     image: {
         width: '100%', // Make the image take the full width of the wrapper
