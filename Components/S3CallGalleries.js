@@ -9,24 +9,24 @@ import { fetchFolders } from './FetchFolders';
 import Galleries from './Galleries'
 
 const Gallery = ({ styles, navigation }) => {
-  const [folderNames, setFolderNames] = useState([]);
+  const [galleries, setGalleries] = useState([]);
 
   useEffect(() => {
-    const loadFolders = async () => {
+    const loadGalleryInfo = async () => {
       try {
-        const folders = await fetchFolders();
-        setFolderNames(folders);
+        const galleryInfo = await fetchFolders();
+        setGalleries(galleryInfo);
       } catch (error) {
         console.error('Error loading folders:', error);
       }
     };
 
-    loadFolders();
+    loadGalleryInfo();
   }, []);
 
   return (
     <View>
-      <Galleries folderNames={folderNames} styles={styles} navigation={navigation}/>
+      <Galleries galleries={galleries} styles={styles} navigation={navigation}/>
     </View>
   );
 };
